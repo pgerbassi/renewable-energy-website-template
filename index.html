@@ -30,6 +30,1047 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        .carousel-logo-overlay {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            width: 50vw;
+            max-width: 500px;
+            opacity: 0.6;
+            z-index: 10;
+            object-fit: contain;
+            @media (max-width: 768px) {
+                opacity: 0.0;
+            }
+        }
+        .background-hero{
+            position: absolute;
+            background-color: #001834;
+            opacity: 0.3;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Modal Styles */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            display: grid;
+            grid-template-columns: 35% 65%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            max-height: 80vh;
+        }
+
+        .modal-image {
+            background: linear-gradient(135deg, var(--primary) 0%, #ffd700 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            max-width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        .modal-form-content {
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-form h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .modal-form p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        .modal-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+            z-index: 10;
+        }
+
+        .modal-content .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            display: grid;
+            grid-template-columns: 35% 65%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            max-height: 80vh;
+        }
+
+        .modal-image {
+            background: linear-gradient(135deg, var(--primary) 0%, #ffd700 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            max-width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        .modal-form-content {
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-form h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .modal-form p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        .modal-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+            z-index: 10;
+        }
+
+        .modal-content .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            display: grid;
+            grid-template-columns: 35% 65%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            max-height: 80vh;
+        }
+
+        .modal-image {
+            background: linear-gradient(135deg, var(--primary) 0%, #ffd700 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            max-width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        .modal-form-content {
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-form h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .modal-form p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        .modal-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+            z-index: 10;
+        }
+
+        .modal-content .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            display: grid;
+            grid-template-columns: 35% 65%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            max-height: 80vh;
+        }
+
+        .modal-image {
+            background: linear-gradient(135deg, var(--primary) 0%, #ffd700 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            max-width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            box-sizing: border-box;
+        }
+
+        .modal-form-content {
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-form h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .modal-form p {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        .modal-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+            z-index: 10;
+        }
+
+        .modal-content .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                grid-template-columns: 1fr;
+                max-width: 90%;
+                margin: 0 auto;
+                width: 100%;
+            }
+
+            .modal-image, .modal-form {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .modal-image {
+                order: -1;
+                height: 120px;
+            }
+
+            .modal-image img {
+                max-height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                max-width: 95%;
+                height: auto;
+            }
+
+            .modal-image {
+                height: 100px;
+            }
+        }
+
+        /* Solar Simulator Styles */
+        .solar-simulator {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        .solar-simulator .container {
+            max-width: 800px;
+        }
+
+        .solar-simulator h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .simulator-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .simulator-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .simulator-form .radio-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .simulator-form .radio-option {
+            flex: 1;
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        .simulator-form .radio-option input {
+            display: none;
+        }
+
+        .simulator-form .radio-option label {
+            display: block;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .simulator-form .radio-option input:checked + label {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .simulator-form input[type="text"],
+        .simulator-form input[type="number"] {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .simulator-form .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        .simulator-form .submit-btn:hover {
+            background-color: #ffa500;
+        }
+
+        .simulator-result {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .simulator-form .radio-group {
+                flex-direction: column;
+            }
+
+            .simulator-form .radio-option {
+                margin: 10px 0;
+            }
+        }
+
+        /* Contact Info Modal Styles */
+        .contact-info-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-info-modal {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-info-modal h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info-modal input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .contact-info-modal .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-info-modal .submit-btn:hover {
+            background-color: #ffa500;
+        }
+
+        .simulator-result {
+            filter: blur(10px);
+            pointer-events: none;
+            opacity: 0.5;
+            text-align: center;
+        }
+
+        .simulator-result-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        .simulator-result-message {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 80%;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 11;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+
+        .simulator-result-blurred {
+            filter: blur(5px);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.8); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+        }
+        
+        .simulator-result-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .simulator-result-message {
+            background-color: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 80%;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1001;
+            animation: fadeIn 0.5s ease-out;
+            
+            /* Absolute clarity */
+            filter: none !important;
+            -webkit-filter: none !important;
+            backdrop-filter: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        .simulator-result-blurred {
+            filter: blur(5px);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.8); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+        }
+        
+        .simulator-result-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .simulator-result-message {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            font-size: 1.3rem;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 10000;
+            animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* Explicitly remove any potential blurring */
+            filter: none !important;
+            -webkit-filter: none !important;
+            transform: scale(1) !important;
+            opacity: 1 !important;
+        }
+
+        .simulator-result-blurred {
+            filter: blur(5px);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .simulator-result-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .simulator-result-overlay-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+
+        .simulator-result-message {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            font-size: 1.3rem;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+            animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* Absolute clarity */
+            filter: none !important;
+            -webkit-filter: none !important;
+            backdrop-filter: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        .simulator-result-blurred {
+            filter: blur(5px);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .simulator-result-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .simulator-result-overlay-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+
+        .simulator-result-message {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            font-size: 1.3rem;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+            animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* Absolute clarity - most aggressive approach */
+            -webkit-filter: none !important;
+            filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+            will-change: transform;
+        }
+
+        .simulator-result-blurred {
+            filter: blur(5px);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .simulator-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            pointer-events: all;
+        }
+
+        .simulator-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+        
+            z-index: 1;
+        }
+
+        .simulator-overlay-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 30px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+
+        .simulator-overlay-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .simulator-overlay-message {
+            position: relative;
+            background-color: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1001;
+            filter: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        .simulator-blurred {
+            
+            pointer-events: none;
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,15 +1097,17 @@
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
-                <div class="h-100 d-inline-flex align-items-center me-4">
-                    <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>(27) 99945-0945</small>
-                </div>
+                <a href="https://api.whatsapp.com/send?phone=5527999450945" target="_blank" rel="noopener noreferrer">
+                    <div class="h-100 d-inline-flex align-items-center me-4">
+                        <small class="fa fa-phone-alt text-primary me-2"></small>
+                        <small>27 99945-0945</small>
+                    </div>
+                    </a>
                 <div class="h-100 d-inline-flex align-items-center mx-n2">
                     <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-square btn-link rounded-0" href=""><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-square btn-link rounded-0" href="https://www.instagram.com/eletrolexsolar/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -75,7 +1118,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
-            <h2 class="m-0 text-primary">Eletrolex</h2>
+            <img src="img/logo-lateral.png" alt="Eletrolex" class="img-fluid" style="max-height: 50px;">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -97,45 +1140,49 @@
     <!-- Carousel Start -->
     <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="owl-carousel header-carousel position-relative">
-            <div class="owl-carousel-item position-relative" data-dot="<img src='img/carousel-1.jpg'>">
-
-
+            <div class="owl-carousel-item position-relative " data-dot="<img src='img/carousel-1.jpg'>">
+                <div class="background-hero"></div>
                 <img class="img-fluid" src="img/carousel-1.jpg" alt="">
+                <img src="img/eletrolex_nobg.png" alt="Eletrolex Logo" class="carousel-logo-overlay">
                 <div class="owl-carousel-inner">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-2 text-primary animated slideInDown">Transforme Sol em Economia!</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-3">Reduza sua conta de luz e invista em um futuro sustentável com nossos painéis solares e serviços de climatização. Eficiência que cabe no seu bolso e no planeta.</p>
-                                <a href="" class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft text-light">Peça seu orçamento gratuito e comece a economizar hoje!</a>
+                                <a href="/quote.html" class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft text-light">Orçamento Gratuito</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="owl-carousel-item position-relative" data-dot="<img src='img/carousel-2.jpg'>">
+                <div class="background-hero"></div>
                 <img class="img-fluid" src="img/carousel-2.jpg" alt="">
+                <img src="img/eletrolex_nobg.png" alt="Eletrolex Logo" class="carousel-logo-overlay">
                 <div class="owl-carousel-inner">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-2 text-primary animated slideInDown">Mais Valor para Seu Imóvel, Mais Conforto para Você!</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-3">Com tecnologia de ponta em energia solar e climatização, sua propriedade fica mais valorizada e eficiente. Invista no que traz retorno garantido.</p>
-                                <a href="" class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">Invista no futuro. Solicite uma consultoria personalizada!</a>
+                                <a href="/quote.html" class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">Consultoria Personalizada!</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="owl-carousel-item position-relative" data-dot="<img src='img/carousel-3.jpg'>">
+                <div class="background-hero"></div>
                 <img class="img-fluid" src="img/carousel-3.jpg" alt="">
+                <img src="img/eletrolex_nobg.png" alt="Eletrolex Logo" class="carousel-logo-overlay">
                 <div class="owl-carousel-inner">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-2 text-primary animated slideInDown">Energia Limpa, Conforto Garantido!</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-3">Reduza o impacto ambiental enquanto economiza na conta de luz. Energia renovável, soluções inteligentes em climatização e elétrica para um mundo mais verde.</p>
-                                <a href="" class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">Comece sua jornada sustentável agora mesmo!</a>
+                                <a href="/quote.html" class="btn btn-primary rounded-pill py-3 px-5 animated slideInLeft">Começe agora!</a>
                             </div>
                         </div>
                     </div>
@@ -156,6 +1203,7 @@
                             <i class="fa fa-users text-white"></i>
                         </div>
                         <h1 class="mb-0" data-toggle="counter-up">10</h1>
+                        <h5 class="mb-3">+</h5>
                     </div>
                     <h5 class="mb-3">Clientes Satisfeitos</h5>
                     <span>Nossos clientes têm confiança em nosso trabalho</span>
@@ -166,6 +1214,7 @@
                             <i class="fa fa-check text-white"></i>
                         </div>
                         <h1 class="mb-0" data-toggle="counter-up">10</h1>
+                        <h5 class="mb-3">+</h5>
                     </div>
                     <h5 class="mb-3">Projetos Concluídos</h5>
                     <span>Nossos clientes confiam em nossos serviços</span>
@@ -175,10 +1224,10 @@
                         <div class="btn-lg-square bg-primary rounded-circle me-3">
                             <i class="fa fa-award text-white"></i>
                         </div>
-                        <h1 class="mb-0" data-toggle="counter-up">95</h1><p>%</p>
+                        <h1 class="mb-0" data-toggle="counter-up">100</h1><p>%</p>
                     </div>
-                    <h5 class="mb-3">Energia Economizada</h5>
-                    <span>Nosso clientes já economizam com a nossa energia renovável</span>
+                    <h5 class="mb-3">Qualidade Garantida</h5>
+                    <span>Nossos produtos são feitos com tecnologia de ponta.</span>
                 </div>
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
                     <div class="d-flex align-items-center mb-4">
@@ -186,6 +1235,7 @@
                             <i class="fa fa-users-cog text-white"></i>
                         </div>
                         <h1 class="mb-0" data-toggle="counter-up">50</h1>
+                        <h5 class="mb-3">+</h5>
                     </div>
                     <h5 class="mb-3">Atendimento</h5>
                     <span>Receba o atendimento personalizado que você precisa</span>
@@ -195,6 +1245,303 @@
     </div>
     <!-- Feature Start -->
 
+    
+    <!-- Solar Simulator Section -->
+    <div class="solar-simulator">
+        <div class="container">
+            <h2>Simulador de Energia Solar</h2>
+            <div class="simulator-form">
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="residential" name="customer-type" value="Residencial" required>
+                        <label for="residential">Residencial</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="business" name="customer-type" value="Empresarial">
+                        <label for="business">Empresarial</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="other" name="customer-type" value="Outro">
+                        <label for="other">Outro</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="location" placeholder="CEP, Cidade ou Bairro" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="number" id="energy-bill" placeholder="Valor da Conta de Energia (R$)" min="0" step="0.01" required>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="simulateSolarEnergy()">Simular Economia</button>
+
+                <div id="simulatorResult" class="simulator-result">
+                    <h3>Resultado da Simulação</h3>
+                    <p id="savingsText" class=""></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Info Modal -->
+    <div id="contactInfoModal" class="contact-info-overlay">
+        <div class="contact-info-modal">
+            <h2>Quase lá! Informe seus dados</h2>
+            <p>Preencha suas informações para ver o resultado completo</p>
+            <form id="contactInfoForm">
+                <input type="text" id="clientName" placeholder="Nome Completo" required>
+                <input type="tel" id="clientWhatsapp" placeholder="Whatsapp (com DDD)" required pattern="[0-9]{10,11}">
+                <input type="email" id="clientEmail" placeholder="Endereço de E-mail" required>
+                <button type="submit" class="submit-btn">Visualizar Resultado</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let simulationData = null;
+
+        function simulateSolarEnergy() {
+            // Get form values
+            const customerType = document.querySelector('input[name="customer-type"]:checked');
+            const location = document.getElementById('location').value;
+            const energyBill = parseFloat(document.getElementById('energy-bill').value);
+            const resultDiv = document.getElementById('simulatorResult');
+            const savingsText = document.getElementById('savingsText');
+
+            // Validate inputs
+            if (!customerType || !location || isNaN(energyBill)) {
+                alert('Por favor, preencha todos os campos corretamente.');
+                return;
+            }
+
+            // Simple simulation logic (can be replaced with more complex calculations)
+            let savingsPercentage = 0;
+            switch(customerType.value) {
+                case 'Residencial':
+                    savingsPercentage = 70;
+                    break;
+                case 'Empresarial':
+                    savingsPercentage = 80;
+                    break;
+                case 'Outro':
+                    savingsPercentage = 65;
+                    break;
+            }
+
+            const monthlySavings = energyBill * (savingsPercentage / 100);
+            const annualSavings = monthlySavings * 12;
+
+            // Store simulation data
+            simulationData = {
+                customerType: customerType.value,
+                location: location,
+                energyBill: energyBill,
+                monthlySavings: monthlySavings,
+                annualSavings: annualSavings,
+                savingsPercentage: savingsPercentage
+            };
+
+            // Blur results and show contact modal
+            resultDiv.classList.add('simulator-result');
+            resultDiv.style.display = 'block';
+            savingsText.innerHTML = `
+                Tipo de Cliente: ### <br>
+                Localização: ### <br>
+                Economia Mensal: R$ ###<br>
+                Economia Anual: R$ ###<br>
+                Redução na Conta: ###%
+            `;
+            
+            // Show contact info modal
+            document.getElementById('contactInfoModal').style.display = 'flex';
+        }
+
+        // Handle contact info form submission
+        document.getElementById('contactInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect contact information
+            const name = document.getElementById('clientName').value;
+            const whatsapp = document.getElementById('clientWhatsapp').value;
+            const email = document.getElementById('clientEmail').value;
+
+            // Combine simulation and contact data
+            const fullData = {
+                ...simulationData,
+                name: name,
+                whatsapp: whatsapp,
+                email: email
+            };
+
+            // Send data to backend (you'll need to implement this)
+            sendSimulationData(fullData);
+
+            // Hide contact modal and unblur results
+            document.getElementById('contactInfoModal').style.display = 'none';
+            document.getElementById('simulatorResult').classList.remove('simulator-result');
+        });
+
+        function sendSimulationData(data) {
+            // Add timestamp to the data
+            data.timestamp = new Date().toISOString();
+
+            // Prepare form data for Formspree
+            const formData = new FormData();
+            formData.append('Nome', data.name);
+            formData.append('Email', data.email);
+            formData.append('Whatsapp', data.whatsapp);
+            formData.append('Tipo de Cliente', data.customerType);
+            formData.append('Localização', data.location);
+            formData.append('Valor da Conta', `R$ ${data.energyBill.toFixed(2)}`);
+            formData.append('Economia Mensal', `R$ ${data.monthlySavings.toFixed(2)}`);
+            formData.append('Economia Anual', `R$ ${data.annualSavings.toFixed(2)}`);
+            formData.append('Percentual de Redução', `${data.savingsPercentage}%`);
+            formData.append('Data', new Date(data.timestamp).toLocaleString());
+
+            // Get simulation container
+            const simulatorContainer = document.querySelector('.simulator-form');
+            
+            // Create overlay
+            const createOverlay = () => {
+                // Remove existing overlay if any
+                const existingOverlay = simulatorContainer.querySelector('.simulator-overlay');
+                if (existingOverlay) {
+                    existingOverlay.remove();
+                }
+
+                // Create overlay
+                const overlay = document.createElement('div');
+                overlay.className = 'simulator-overlay';
+
+                // Create message
+                const message = document.createElement('div');
+                message.className = 'simulator-overlay-message';
+                message.textContent = 'Iremos lhe enviar a melhor proposta para seu resultado.';
+
+                // Explicitly set styles to prevent blurring
+                Object.assign(message.style, {
+                    filter: 'none',
+                    transform: 'none',
+                    opacity: '1',
+                    position: 'relative',
+                    zIndex: '1001'
+                });
+
+                // Append message to overlay
+                overlay.appendChild(message);
+                simulatorContainer.appendChild(overlay);
+
+                // Blur the container
+                simulatorContainer.classList.add('simulator-blurred');
+
+                return overlay;
+            };
+
+            // Create and show overlay
+            const overlay = createOverlay();
+
+            // Send to Formspree
+            fetch('https://formspree.io/f/xgvolloa', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Retrieve existing leads from localStorage
+                    let leads = JSON.parse(localStorage.getItem('solarLeads') || '[]');
+
+                    // Add new lead
+                    leads.push(data);
+
+                    // Save updated leads back to localStorage
+                    localStorage.setItem('solarLeads', JSON.stringify(leads));
+
+                    // Optional: Limit number of stored leads
+                    if (leads.length > 100) {
+                        leads = leads.slice(-100);
+                        localStorage.setItem('solarLeads', JSON.stringify(leads));
+                    }
+
+                    alert('Seus dados foram enviados com sucesso! Entraremos em contato em breve.');
+                } else {
+                    throw new Error('Falha no envio');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro. Por favor, tente novamente.');
+                
+                // Remove blurred effect if there's an error
+                simulatorContainer.classList.remove('simulator-blurred');
+                overlay.remove();
+            });
+        }
+
+        // Optional: Add a function to view and manage leads (for your reference)
+        function manageSolarLeads() {
+            const leads = JSON.parse(localStorage.getItem('solarLeads') || '[]');
+            
+            // Create a simple display of leads
+            const leadsContainer = document.createElement('div');
+            leadsContainer.style.position = 'fixed';
+            leadsContainer.style.top = '50px';
+            leadsContainer.style.right = '50px';
+            leadsContainer.style.width = '400px';
+            leadsContainer.style.maxHeight = '500px';
+            leadsContainer.style.overflowY = 'auto';
+            leadsContainer.style.backgroundColor = 'white';
+            leadsContainer.style.border = '1px solid #ddd';
+            leadsContainer.style.padding = '20px';
+            leadsContainer.style.zIndex = '9999';
+
+            const title = document.createElement('h2');
+            title.textContent = 'Leads do Simulador Solar';
+            leadsContainer.appendChild(title);
+
+            leads.forEach((lead, index) => {
+                const leadDiv = document.createElement('div');
+                leadDiv.style.borderBottom = '1px solid #eee';
+                leadDiv.style.padding = '10px 0';
+                leadDiv.innerHTML = `
+                    <strong>Lead #${index + 1}</strong><br>
+                    Nome: ${lead.name}<br>
+                    Email: ${lead.email}<br>
+                    Whatsapp: ${lead.whatsapp}<br>
+                    Data: ${new Date(lead.timestamp).toLocaleString()}
+                `;
+                leadsContainer.appendChild(leadDiv);
+            });
+
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = 'Fechar';
+            closeBtn.style.marginTop = '10px';
+            closeBtn.onclick = () => document.body.removeChild(leadsContainer);
+            leadsContainer.appendChild(closeBtn);
+
+            const clearBtn = document.createElement('button');
+            clearBtn.textContent = 'Limpar Leads';
+            clearBtn.style.marginTop = '10px';
+            clearBtn.style.marginLeft = '10px';
+            clearBtn.onclick = () => {
+                localStorage.removeItem('solarLeads');
+                leadsContainer.innerHTML = '<h2>Leads Removidos</h2>';
+            };
+            leadsContainer.appendChild(clearBtn);
+
+            document.body.appendChild(leadsContainer);
+        }
+
+        // Optional: Add a secret key combination to view leads (e.g., Ctrl+Shift+L)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'L') {
+                manageSolarLeads();
+            }
+        });
+    </script>
 
     <!-- About Start -->
     <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
@@ -214,7 +1561,7 @@
                         <p><i class="fa fa-check-circle text-primary me-3"></i>Atendimento especializado e consultoria personalizada</p>
                         <p><i class="fa fa-check-circle text-primary me-3"></i>Soluções sustentáveis que cabem no seu orçamento</p>
                         <p><i class="fa fa-check-circle text-primary me-3"></i>Compromisso com a qualidade, segurança e eficiência</p>
-                        <a href="" class="btn btn-primary rounded-pill py-3 px-5 mt-3">Junte-se a nós</a>
+                        <a href="/quote.html" class="btn btn-primary rounded-pill py-3 px-5 mt-3">Junte-se a nós</a>
                     </div>
                 </div>
             </div>
@@ -327,45 +1674,45 @@
                         <div class="row g-4">
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
-                                    <div class="btn-lg-square bg-primary rounded-circle">
+                                    <div class="btn-lg-square bg-primary rounded-circle me-3">
                                         <i class="fa fa-check text-white"></i>
                                     </div>
                                     <div class="ms-4">
                                         <p class="mb-0">Economia</p>
-                                        <h5 class="mb-0">Reduza sua conta até 95%</h5>
+                                        <h6 class="mb-0">Reduza sua conta até 95%</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
-                                    <div class="btn-lg-square bg-primary rounded-circle">
+                                    <div class="btn-lg-square bg-primary rounded-circle me-3">
                                         <i class="fa fa-user-check text-white"></i>
                                     </div>
                                     <div class="ms-4">
                                         <p class="mb-0">Valorização</p>
-                                        <h5 class="mb-0">Imóvel mais valorizado.</h5>
+                                        <h6 class="mb-0">Imóvel mais valorizado.</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
-                                    <div class="btn-lg-square bg-primary rounded-circle">
+                                    <div class="btn-lg-square bg-primary rounded-circle me-3">
                                         <i class="fa fa-drafting-compass text-white"></i>
                                     </div>
                                     <div class="ms-4">
                                         <p class="mb-0">Sustentabilidade</p>
-                                        <h5 class="mb-0">Menor impacto ambiental</h5>
+                                        <h6 class="mb-0">Menor impacto ambiental</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
-                                    <div class="btn-lg-square bg-primary rounded-circle">
+                                    <div class="btn-lg-square bg-primary rounded-circle me-3">
                                         <i class="fa fa-headphones text-white"></i>
                                     </div>
                                     <div class="ms-4">
                                         <p class="mb-0">Renovável</p>
-                                        <h5 class="mb-0">Energia limpa infinita</h5>
+                                        <h6 class="mb-0">Energia limpa infinita</h6>
                                     </div>
                                 </div>
                             </div>
@@ -491,8 +1838,9 @@
     <!-- Projects End -->
 
 
-    <!-- Quote Start -->
-    <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
+   <!-- Quote Start -->
+   <div class="bg-dark">
+    <div class="container-fluid bg-light overflow-hidden my-0 px-lg-0">
         <div class="container quote px-lg-0">
             <div class="row g-0 mx-lg-0">
                 <div class="col-lg-6 ps-lg-0 wow fadeIn" data-wow-delay="0.1s" style="min-height: 400px;">
@@ -505,38 +1853,131 @@
                         <h6 class="text-primary">Oportunidade de Orçamento</h6>
                         <h1 class="mb-4">Faça um orçamento sem custo!</h1>
                         <p class="mb-4 pb-2">Economize na conta de luz e valorize seu imóvel com energia limpa e eficiente. Faça seu orçamento gratuito agora e descubra como transformar sua casa ou empresa em um espaço mais sustentável!</p>
-                        <form>
+                        <form id="quoteForm" action="https://formspree.io/f/xgvolloa" method="POST">
                             <div class="row g-3">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Seu Nome" style="height: 55px;">
+                                    <input type="text" name="Nome" class="form-control border-0" placeholder="Seu Nome" style="height: 55px;" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control border-0" placeholder="Seu Email" style="height: 55px;">
+                                    <input type="email" name="Email" class="form-control border-0" placeholder="Seu Email" style="height: 55px;" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Seu Telefone" style="height: 55px;">
+                                    <input type="tel" name="Telefone" class="form-control border-0" placeholder="Seu Telefone" style="height: 55px;" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;">
-                                        <option selected>Selecione um Serviço</option>
-                                        <option value="1">Placa Solar</option>
-                                        <option value="2">Ar Condicionado</option>
-                                        <option value="3">Turbinas de Vento</option>
+                                    <select name="Serviço" class="form-select border-0" style="height: 55px;" required>
+                                        <option value="">Selecione um Serviço</option>
+                                        <option value="Placa Solar">Placa Solar</option>
+                                        <option value="Ar Condicionado">Ar Condicionado</option>
+                                        <option value="Turbinas de Vento">Turbinas de Vento</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control border-0" placeholder="Mensagem"></textarea>
+                                    <textarea name="Mensagem" class="form-control border-0" placeholder="Mensagem" required></textarea>
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-primary rounded-pill py-3 px-5" type="submit">Enviar</button>
                                 </div>
                             </div>
                         </form>
+
+                        <script>
+                            document.getElementById('quoteForm').addEventListener('submit', function(event) {
+                                event.preventDefault();
+                                
+                                // Create FormData object
+                                const formData = new FormData(event.target);
+                                
+                                // Create overlay
+                                const createOverlay = () => {
+                                    const quoteTextSection = document.querySelector('.quote-text');
+                                    
+                                    // Remove any existing overlay
+                                    const existingOverlay = quoteTextSection.querySelector('.simulator-overlay');
+                                    if (existingOverlay) {
+                                        existingOverlay.remove();
+                                    }
+
+                                    const overlay = document.createElement('div');
+                                    overlay.className = 'simulator-overlay';
+                                    
+                                    const message = document.createElement('div');
+                                    message.className = 'simulator-overlay-message';
+                                    
+                                    // Create close button
+                                    const closeButton = document.createElement('button');
+                                    closeButton.className = 'simulator-overlay-close';
+                                    closeButton.innerHTML = '&times;';
+                                    closeButton.setAttribute('aria-label', 'Fechar mensagem');
+                                    
+                                    // Ensure button is fully clickable
+                                    closeButton.style.position = 'absolute';
+                                    closeButton.style.top = '10px';
+                                    closeButton.style.right = '10px';
+                                    closeButton.style.zIndex = '1002';
+                                    
+                                    // Add close functionality
+                                    closeButton.addEventListener('click', (e) => {
+                                        e.preventDefault(); // Prevent default button behavior
+                                        e.stopPropagation(); // Prevent event bubbling
+                                        
+                                        // Animate out before removing
+                                        message.style.transform = 'scale(0.8)';
+                                        message.style.opacity = '0';
+                                        
+                                        // Remove after animation
+                                        setTimeout(() => {
+                                            overlay.remove();
+                                            quoteTextSection.classList.remove('simulator-blurred');
+                                        }, 300);
+                                    });
+                                    
+                                    // Add message text
+                                    const messageText = document.createElement('p');
+                                    messageText.textContent = 'Recebemos sua solicitação! Entraremos em contato em breve.';
+                                    
+                                    // Assemble message
+                                    message.appendChild(closeButton);
+                                    message.appendChild(messageText);
+                                    
+                                    overlay.appendChild(message);
+                                    quoteTextSection.appendChild(overlay);
+                                    quoteTextSection.classList.add('simulator-blurred');
+
+                                    return overlay;
+                                };
+
+                                // Send form data
+                                fetch(event.target.action, {
+                                    method: 'POST',
+                                    body: formData,
+                                    headers: {
+                                        'Accept': 'application/json'
+                                    }
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        // Create overlay
+                                        createOverlay();
+                                        
+                                        // Optional: Reset form
+                                        event.target.reset();
+                                    } else {
+                                        throw new Error('Falha no envio');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Erro:', error);
+                                    alert('Ocorreu um erro. Por favor, tente novamente.');
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
     <!-- Quote End -->
 
 
@@ -553,9 +1994,9 @@
                         <div class="d-flex">
                             <img class="img-fluid w-75" src="img/team-1.jpg" alt="">
                             <div class="team-social w-25">
-                                <a class="btn btn-lg-square btn-outline-primary rounded-circle mt-3" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-lg-square btn-outline-primary rounded-circle mt-3" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-lg-square btn-outline-primary rounded-circle mt-3" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle mt-3" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle mt-3" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle mt-3" href=""><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                         <div class="p-4">
@@ -569,9 +2010,9 @@
                         <div class="d-flex">
                             <img class="img-fluid w-75" src="img/team-2.jpg" alt="">
                             <div class="team-social w-25">
-                                <a class="btn btn-lg-square btn-outline-primary rounded-circle mt-3" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-lg-square btn-outline-primary rounded-circle mt-3" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-lg-square btn-outline-primary rounded-circle mt-3" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle mt-3" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle mt-3" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle mt-3" href=""><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                         <div class="p-4">
@@ -585,9 +2026,9 @@
                         <div class="d-flex">
                             <img class="img-fluid w-75" src="img/team-3.jpg" alt="">
                             <div class="team-social w-25">
-                                <a class="btn btn-lg-square btn-outline-primary rounded-circle mt-3" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-lg-square btn-outline-primary rounded-circle mt-3" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-lg-square btn-outline-primary rounded-circle mt-3" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle mt-3" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle mt-3" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-lg-square btn-outline-light rounded-circle mt-3" href=""><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                         <div class="p-4">
@@ -655,72 +2096,16 @@
     <!-- Testimonial End -->
 
 
+
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-body footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Endereço</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Vila Velha, Espirito Santo, Brasil</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>27 99945-0945</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Links diretos</h5>
-                    <a class="btn btn-link" href="">Sobre</a>
-                    <a class="btn btn-link" href="">Contato</a>
-                    <a class="btn btn-link" href="">Serviços</a>
-                    <a class="btn btn-link" href="">Termos & Condições</a>
-                    <a class="btn btn-link" href="">Suporte</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Galeria de Projetos</h5>
-                    <div class="row g-2">
-                        <div class="col-4">
-                            <img class="img-fluid rounded" src="img/gallery-1.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded" src="img/gallery-2.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded" src="img/gallery-3.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded" src="img/gallery-4.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded" src="img/gallery-5.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid rounded" src="img/gallery-6.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Newsletter</h5>
-                    <p>Assine nossa newsletter para receber as última notícias.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Seu e-mail">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Assinar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a href="#">Eletrolex</a>, Todos os Direitos Reservados.
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        Desenvolvido por <a href="linkedin.com/in/pablo-gerbassi">P6G Software</a>
-                    </div>
+            <div class="row g-5">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a href="#">Eletrolex</a>, Todos os Direitos Reservados.
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    Desenvolvido por <a href="https://www.linkedin.com/in/pablo-gerbassi-desenvolvedor/">P6G Software</a>
                 </div>
             </div>
         </div>
@@ -745,6 +2130,54 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-image">
+                <img src="img/eletrolex_nobg.png" alt="Eletrolex Logo">
+            </div>
+            <div class="modal-form">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <div class="modal-form-content">
+                    <h2>Solicite seu Orçamento</h2>
+                    <p>Preencha seus dados e entraremos em contato</p>
+                    <form id="contactForm">
+                        <input type="text" id="name" placeholder="Nome Completo" required>
+                        <input type="tel" id="phone" placeholder="Número de Telefone" required>
+                        <input type="email" id="email" placeholder="Endereço de E-mail" required>
+                        <button type="submit" class="submit-btn">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function openModal() {
+            document.getElementById('contactModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+
+            alert(`Obrigado, ${name}! Entraremos em contato em breve.`);
+            closeModal();
+        });
+
+
+    </script>
 </body>
 
 </html>

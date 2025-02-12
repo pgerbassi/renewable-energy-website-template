@@ -33,6 +33,83 @@
 </head>
 
 <body>
+    <style>
+        /* Existing styles... */
+
+        .simulator-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            pointer-events: all;
+        }
+
+        .simulator-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+        
+            z-index: 1;
+        }
+
+        .simulator-overlay-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 30px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+
+        .simulator-overlay-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .simulator-overlay-message {
+            position: relative;
+            background-color: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1001;
+            filter: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        .simulator-blurred {
+            
+            pointer-events: none;
+            opacity: 1;
+        }
+    </style>
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -56,15 +133,17 @@
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
-                <div class="h-100 d-inline-flex align-items-center me-4">
-                    <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>27 99945-0945</small>
-                </div>
+                <a href="https://api.whatsapp.com/send?phone=5527999450945" target="_blank" rel="noopener noreferrer">
+                    <div class="h-100 d-inline-flex align-items-center me-4">
+                        <small class="fa fa-phone-alt text-primary me-2"></small>
+                        <small>27 99945-0945</small>
+                    </div>
+                    </a>
                 <div class="h-100 d-inline-flex align-items-center mx-n2">
                     <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-twitter"></i></a>
                     <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-square btn-link rounded-0" href=""><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-square btn-link rounded-0" href="https://www.instagram.com/eletrolexsolar/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -75,7 +154,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
-            <h2 class="m-0 text-primary">Eletrolex</h2>
+            <img src="img/logo-lateral.png" alt="Eletrolex" class="img-fluid" style="max-height: 50px;">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -93,9 +172,9 @@
     </nav>
     <!-- Navbar End -->
 
-
+<div class="hidden">
     <!-- Page Header Start -->
-    <div class="container-fluid page-header py-5 mb-5">
+    <div class="container-fluid page-header py-0 mb-5">
         <div class="container py-5">
             <h1 class="display-3 text-white mb-3 animated slideInDown">Orcamento Gratuito</h1>
             <nav aria-label="breadcrumb animated slideInDown">
@@ -108,10 +187,12 @@
         </div>
     </div>
     <!-- Page Header End -->
+</div>
 
 
-    !-- Quote Start -->
-    <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
+    <!-- Quote Start -->
+<div class="bg-dark">
+    <div class="container-fluid bg-light overflow-hidden my-0 px-lg-0">
         <div class="container quote px-lg-0">
             <div class="row g-0 mx-lg-0">
                 <div class="col-lg-6 ps-lg-0 wow fadeIn" data-wow-delay="0.1s" style="min-height: 400px;">
@@ -124,43 +205,137 @@
                         <h6 class="text-primary">Oportunidade de Orçamento</h6>
                         <h1 class="mb-4">Faça um orçamento sem custo!</h1>
                         <p class="mb-4 pb-2">Economize na conta de luz e valorize seu imóvel com energia limpa e eficiente. Faça seu orçamento gratuito agora e descubra como transformar sua casa ou empresa em um espaço mais sustentável!</p>
-                        <form>
+                        <form id="quoteForm" action="https://formspree.io/f/xgvolloa" method="POST">
                             <div class="row g-3">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Seu Nome" style="height: 55px;">
+                                    <input type="text" name="Nome" class="form-control border-0" placeholder="Seu Nome" style="height: 55px;" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control border-0" placeholder="Seu Email" style="height: 55px;">
+                                    <input type="email" name="Email" class="form-control border-0" placeholder="Seu Email" style="height: 55px;" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Seu Telefone" style="height: 55px;">
+                                    <input type="tel" name="Telefone" class="form-control border-0" placeholder="Seu Telefone" style="height: 55px;" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;">
-                                        <option selected>Selecione um Serviço</option>
-                                        <option value="1">Placa Solar</option>
-                                        <option value="2">Ar Condicionado</option>
-                                        <option value="3">Turbinas de Vento</option>
+                                    <select name="Serviço" class="form-select border-0" style="height: 55px;" required>
+                                        <option value="">Selecione um Serviço</option>
+                                        <option value="Placa Solar">Placa Solar</option>
+                                        <option value="Ar Condicionado">Ar Condicionado</option>
+                                        <option value="Turbinas de Vento">Turbinas de Vento</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control border-0" placeholder="Mensagem"></textarea>
+                                    <textarea name="Mensagem" class="form-control border-0" placeholder="Mensagem" required></textarea>
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-primary rounded-pill py-3 px-5" type="submit">Enviar</button>
                                 </div>
                             </div>
                         </form>
+
+                        <script>
+                            document.getElementById('quoteForm').addEventListener('submit', function(event) {
+                                event.preventDefault();
+                                
+                                // Create FormData object
+                                const formData = new FormData(event.target);
+                                
+                                // Create overlay
+                                const createOverlay = () => {
+                                    const quoteTextSection = document.querySelector('.quote-text');
+                                    
+                                    // Remove any existing overlay
+                                    const existingOverlay = quoteTextSection.querySelector('.simulator-overlay');
+                                    if (existingOverlay) {
+                                        existingOverlay.remove();
+                                    }
+
+                                    const overlay = document.createElement('div');
+                                    overlay.className = 'simulator-overlay';
+                                    
+                                    const message = document.createElement('div');
+                                    message.className = 'simulator-overlay-message';
+                                    
+                                    // Create close button
+                                    const closeButton = document.createElement('button');
+                                    closeButton.className = 'simulator-overlay-close';
+                                    closeButton.innerHTML = '&times;';
+                                    closeButton.setAttribute('aria-label', 'Fechar mensagem');
+                                    
+                                    // Ensure button is fully clickable
+                                    closeButton.style.position = 'absolute';
+                                    closeButton.style.top = '10px';
+                                    closeButton.style.right = '10px';
+                                    closeButton.style.zIndex = '1002';
+                                    
+                                    // Add close functionality
+                                    closeButton.addEventListener('click', (e) => {
+                                        e.preventDefault(); // Prevent default button behavior
+                                        e.stopPropagation(); // Prevent event bubbling
+                                        
+                                        // Animate out before removing
+                                        message.style.transform = 'scale(0.8)';
+                                        message.style.opacity = '0';
+                                        
+                                        // Remove after animation
+                                        setTimeout(() => {
+                                            overlay.remove();
+                                            quoteTextSection.classList.remove('simulator-blurred');
+                                        }, 300);
+                                    });
+                                    
+                                    // Add message text
+                                    const messageText = document.createElement('p');
+                                    messageText.textContent = 'Recebemos sua solicitação! Entraremos em contato em breve.';
+                                    
+                                    // Assemble message
+                                    message.appendChild(closeButton);
+                                    message.appendChild(messageText);
+                                    
+                                    overlay.appendChild(message);
+                                    quoteTextSection.appendChild(overlay);
+                                    quoteTextSection.classList.add('simulator-blurred');
+
+                                    return overlay;
+                                };
+
+                                // Send form data
+                                fetch(event.target.action, {
+                                    method: 'POST',
+                                    body: formData,
+                                    headers: {
+                                        'Accept': 'application/json'
+                                    }
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        // Create overlay
+                                        createOverlay();
+                                        
+                                        // Optional: Reset form
+                                        event.target.reset();
+                                    } else {
+                                        throw new Error('Falha no envio');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Erro:', error);
+                                    alert('Ocorreu um erro. Por favor, tente novamente.');
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
     <!-- Quote End -->
+
         
 
-    !-- Footer Start -->
-    <div class="container-fluid bg-dark text-body footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-body footer mt-5 pt-3 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
