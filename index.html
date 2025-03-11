@@ -67,7 +67,9 @@
         }
 
         .modal-overlay {
-            display: none;
+            /*display: none;*/
+            opacity: 0;
+            visibility: hidden;
             position: fixed;
             top: 0;
             left: 0;
@@ -184,7 +186,9 @@
         }
 
         .modal-overlay {
-            display: none;
+            /*display: none;*/
+            opacity: 0;
+            visibility: hidden;
             position: fixed;
             top: 0;
             left: 0;
@@ -301,7 +305,9 @@
         }
 
         .modal-overlay {
-            display: none;
+            /*display: none;*/
+            opacity: 0;
+            visibility: hidden;
             position: fixed;
             top: 0;
             left: 0;
@@ -418,7 +424,9 @@
         }
 
         .modal-overlay {
-            display: none;
+            /*display: none;*/
+            opacity: 0;
+            visibility: hidden;
             position: fixed;
             top: 0;
             left: 0;
@@ -433,6 +441,10 @@
             padding: 20px;
             box-sizing: border-box;
             overflow: hidden;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
         }
 
         .modal-content {
@@ -449,7 +461,7 @@
         }
 
         .modal-image {
-            background: linear-gradient(135deg, var(--primary) 0%, #ffd700 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #002860 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1679,7 +1691,7 @@
                                     </div>
                                     <div class="ms-4">
                                         <p class="mb-0">Economia</p>
-                                        <h6 class="mb-0">Reduza sua conta até 95%</h6>
+                                        <h6 class="mb-0">Reduza sua conta até 90%</h6>
                                     </div>
                                 </div>
                             </div>
@@ -1981,7 +1993,7 @@
     <!-- Quote End -->
 
 
-    <!-- Team Start -->
+    <!-- Team Start 
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
@@ -2040,7 +2052,7 @@
             </div>
         </div>
     </div>
-    <!-- Team End -->
+     Team End -->
 
 
     <!-- Testimonial Start -->
@@ -2105,7 +2117,7 @@
                     <h5 class="text-white mb-4">Endereço</h5>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Vila Velha, Espirito Santo, Brasil</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>27 99945-0945</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>eletrolexsolar@gmail.com</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-square btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-square btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
@@ -2202,7 +2214,7 @@
                     <form id="contactForm">
                         <input type="text" id="name" placeholder="Nome Completo" required>
                         <input type="tel" id="phone" placeholder="Número de Telefone" required>
-                        <input type="email" id="email" placeholder="Endereço de E-mail" required>
+                        <!-- <input type="email" id="email" placeholder="Endereço de E-mail" required> -->
                         <button type="submit" class="submit-btn">Enviar</button>
                     </form>
                 </div>
@@ -2216,12 +2228,20 @@
         function openModal() {
             document.getElementById('contactModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                document.getElementById("contactModal").classList.add("show");
+            }, 10);
         }
 
         function closeModal() {
             document.getElementById('contactModal').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(openModal, 20000); // 3-second delay
+            document.getElementById("closeBtn").addEventListener("click", closeModal);
+        });
 
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
