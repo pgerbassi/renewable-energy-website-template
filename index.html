@@ -11,14 +11,6 @@
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TPKBBR3R');</script>
-    <!-- End Google Tag Manager -->
-    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1101,10 +1093,6 @@
         </div>
     </div>
     <!-- Spinner End -->
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TPKBBR3R"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
 
     <!-- Topbar Start -->
@@ -2223,9 +2211,9 @@
                 <div class="modal-form-content">
                     <h2>Solicite seu Orçamento</h2>
                     <p>Preencha seus dados e entraremos em contato</p>
-                    <form id="contactForm">
-                        <input type="text" id="name" placeholder="Nome Completo" required>
-                        <input type="tel" id="phone" placeholder="Número de Telefone" required>
+                    <form id="contactForm" action='https://formspree.io/f/xgvolloa' method='POST'>
+                        <input type="text" id="name" name="Nome" placeholder="Nome Completo" required>
+                        <input type="tel" id="phone" name="Telefone" placeholder="Número de Telefone" required>
                         <!-- <input type="email" id="email" placeholder="Endereço de E-mail" required> -->
                         <button type="submit" class="submit-btn">Enviar</button>
                     </form>
@@ -2234,6 +2222,97 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Create FormData object
+            const formData = new FormData(event.target);
+            
+            // Create overlay
+            const createOverlay = () => {
+                const quoteTextSection = document.querySelector('.contactModal');
+                
+                // Remove any existing overlay
+                const existingOverlay = quoteTextSection.querySelector('.simulator-overlay');
+                if (existingOverlay) {
+                    existingOverlay.remove();
+                }
+
+                const overlay = document.createElement('div');
+                overlay.className = 'simulator-overlay';
+                
+                const message = document.createElement('div');
+                message.className = 'simulator-overlay-message';
+                
+                // Create close button
+                const closeButton = document.createElement('button');
+                closeButton.className = 'simulator-overlay-close';
+                closeButton.innerHTML = '&times;';
+                closeButton.setAttribute('aria-label', 'Fechar mensagem');
+                
+                // Ensure button is fully clickable
+                closeButton.style.position = 'absolute';
+                closeButton.style.top = '10px';
+                closeButton.style.right = '10px';
+                closeButton.style.zIndex = '1002';
+                
+                // Add close functionality
+                closeButton.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default button behavior
+                    e.stopPropagation(); // Prevent event bubbling
+                    
+                    // Animate out before removing
+                    message.style.transform = 'scale(0.8)';
+                    message.style.opacity = '0';
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        overlay.remove();
+                        quoteTextSection.classList.remove('simulator-blurred');
+                    }, 300);
+                });
+                
+                // Add message text
+                const messageText = document.createElement('p');
+                messageText.textContent = 'Recebemos sua solicitação! Entraremos em contato em breve.';
+                
+                // Assemble message
+                message.appendChild(closeButton);
+                message.appendChild(messageText);
+                
+                overlay.appendChild(message);
+                quoteTextSection.appendChild(overlay);
+                quoteTextSection.classList.add('simulator-blurred');
+
+                return overlay;
+            };
+
+            // Send form data
+            fetch(event.target.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Create overlay
+                    createOverlay();
+                    
+                    // Optional: Reset form
+                    event.target.reset();
+                } else {
+                    throw new Error('Falha no envio');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro. Por favor, tente novamente.');
+            });
+        });
+    </script>
 
 
     <script>
